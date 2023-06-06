@@ -1,28 +1,67 @@
 <div>
+    <x-notifications />
     <form class="p-8 bg-gray-200 flex flex-col w-1/2 mx-auto gap-4">
         <h1>Buscador de CEP</h1>
-        <div>
+        <div class="flex flex-col w-1/2">
             <label for='zipcode'>CEP</label>
-            <input class="border" id="zipcode" type="text" wire:model.lazy='zipcode'/>
+            <input class="border" id="zipcode" type="text" wire:model.lazy="zipcode" />
+            @error("zipcode")
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
         </div>
-        <div>
+        <div class="flex flex-col w-1/2">
             <label for='street'>Logradouro</label>
-            <input class="border" id="street" type="text" wire:model='street'/>
+            <input class="border" id="street" type="text" wire:model="street" />
+            @error('street')
+            <span class="text-red-500">{{ $message }}</span>
+            @enderror
         </div>
-        <div>
+        <div class="flex flex-col w-1/2">
             <label for='neighborhood'>Bairro</label>
-            <input class="border" id="neighborhood" type="text" wire:model='neighborhood'/>
+            <input class="border" id="neighborhood" type="text" wire:model="neighborhood" />
         </div>
-        <div>
+        <div class="flex flex-col w-1/2">
             <label for='city'>Cidade</label>
-            <input class="border" id="city" type="text" wire:model='city'/>
+            <input class="border" id="city" type="text" wire:model="city" />
         </div>
-        <div>
+        <div class="flex flex-col w-1/2">
             <label for='state'>Estado</label>
-            <input class="border" id="state" type="text" wire:model='state'>
+            <input class="border" id="state" type="text" wire:model="state">
         </div>
-        <div>
-            <button class="px-4 py-2 bg-green-500 hover:bg-green-400 text-white rounded-md" wire:click='search'>Buscar</button>
+        <div class="gap-x-4">
+            <button class="px-4 py-2 bg-green-500 hover:bg-green-400 text-white rounded-md" wire:click="save">Salvar
+                Endereço
+            </button>
         </div>
     </form>
+    <hr>
+    <div class="my-8 w-[60%] container mx-auto bg-gray-200">
+        <table class="table-auto">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2">CEP</th>
+                    <th class="px-4 py-2">Rua</th>
+                    <th class="px-4 py-2">Bairro</th>
+                    <th class="px-4 py-2">Cidade</th>
+                    <th class="px-4 py-2">Estado</th>
+                    <th class="px-4 py-2">Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($addresses as $address)
+                <tr>
+                    <td class="px-4 py-2">{{ $address['zipcode'] }}</td>
+                    <td class="px-4 py-2">{{ $address['street'] }}</td>
+                    <td class="px-4 py-2">{{ $address['neighborhood'] }}</td>
+                    <td class="px-4 py-2">{{ $address['city'] }}</td>
+                    <td class="px-4 py-2">{{ $address['state'] }}</td>
+                    <td class="border px-4 py-2 flex gap-x-4">
+                        <button class="text-blue-500" wire:click="edit({{ $address['id'] }})" type="button">Editar</button>
+                        <button class="text-red-500" wire:click="remove({{ $address['id'] }})" type="button">Deletar</button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
