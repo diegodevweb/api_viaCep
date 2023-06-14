@@ -57,7 +57,7 @@
                     <td class="px-4 py-2">{{ $address['state'] }}</td>
                     <td class="border px-4 py-2 flex gap-x-4">
                         <button class="text-blue-500" wire:click="edit({{ $address['id'] }})" type="button">Editar</button>
-                        <button class="text-red-500" wire:click="remove({{ $address['id'] }})" type="button">Deletar</button>
+                        <button class="text-red-500" wire:click="remove({{ $address['id'] }})"x` type="button">Deletar</button>
                     </td>
                 </tr>
                 @endforeach
