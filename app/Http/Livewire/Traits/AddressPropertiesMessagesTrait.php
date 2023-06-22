@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Traits;
 
-trait AddressPropertiesValidationMessagesTrait
+trait AddressPropertiesMessagesTrait
 {
     protected array $messages = [
         'data.zipcode.required' => 'O campo CEP é obrigatório.',
@@ -15,3 +15,4 @@ trait AddressPropertiesValidationMessagesTrait
         'data.state.max' => 'O campo ESTADO deve ter exatamente 2 CARACTERES.',
     ];
 }
+

@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Actions\AddressStoreAction;
+use App\Http\Livewire\Traits\AddressPropertiesMessagesTrait;
+use App\Http\Livewire\Traits\AddressPropertiesRulesValidationTrait;
+use App\Services\ViaCep\ViaCepService;
 use Illuminate\Support\Facades\Http;
 use App\Models\Address;
 use Livewire\Component;
@@ -11,87 +15,68 @@ use WireUi\Traits\Actions;
 class SearchZipcode extends Component
 {
     use Actions;
-    protected array $rules = [
-        'zipcode' => ['required'],
-        'street' => ['required'],
-        'neighborhood' => ['required'],
-        'city' => ['required'],
-        'state' => ['required', 'max:2'],
-    ];
+    use AddressPropertiesRulesValidationTrait;
+    use AddressPropertiesMessagesTrait;
 
-    protected array $messages = [
-        'zipcode.required' => 'O campo CEP é obrigatorio.',
-        'street.required' => 'O campo ENDEREÇO é obrigatorio.',
-        'neighborhood.required' => 'O campo BAIRRO é obrigatorio.',
-        'city.required' => 'O campo CIDADE é obrigatorio.',
-        'state.required' => 'O campo ESTADO é obrigatorio.',
-        'state.max' => 'O campo ESTADO deve ter exatamente 2 caracteres.',
-    ];
-
-    public string $zipcode = '';
-
-    public string $street = '';
-
-    public string $neighborhood = '';
-
-    public string $city = '';
-
-    public string $state = '';
-
+    public array $data = [];
     public array $addresses = [];
 
-    public function updatedZipcode(string $value)
+    public function updated(string $key, string $value):void
     {
-        $response = Http::get("http://viacep.com.br/ws/{$value}/json/")->json();
-
-        $this->zipcode = $response['cep'];
-        $this->street = $response['logradouro'];
-        $this->neighborhood = $response['bairro'];
-        $this->city = $response['localidade'];
-        $this->state = $response['uf'];
+        if($key === 'data.zipcode') {
+            $this->data = ViaCepService::handle($value);
+        }
     }
 
     public function save(): void
     {
+
         $this->validate();
 
-        Address::updateOrCreate(
-            [
-                'zipcode' => $this->zipcode,
-            ],
-            [
-                'street' => $this->street,
-                'neighborhood' => $this->neighborhood,
-                'city' => $this->city,
-                'state' => $this->state,
-            ],
-        );
+        AddressStoreAction::save($this->data);
 
         $this->render();
-        
-        $this->notification()->success('Mensagem', 'Criacao/alteracao realizada com sucesso!');
+
+        $this->showNotification('Atualizacao/Criacao', 'Endereco salvo/atualizado com sucesso!');
 
         $this->resetExcept('addresses');
+
 
     }
 
     public function edit(string $id): void
     {
         $address = Address::find($id);
-        $this->zipcode = $address->zipcode;
-        $this->street = $address->street;
-        $this->neighborhood = $address->neighborhood;
-        $this->city = $address->city;
-        $this->state = $address->state;
+        $this->data['zipcode'] = $address->zipcode;
+        $this->data['street'] = $address->street;
+        $this->data['neighborhood'] = $address->neighborhood;
+        $this->data['city'] = $address->city;
+        $this->data['state'] = $address->state;
     }
 
     public function remove(string $id): void
-    {   
+    {
         $address = Address::find($id);
         $address?->delete();
+        $this->showNotification('Exclusao de endereco.', 'Endereco excluido com sucesso.');
+    }
+
+    private function showNotification(string $title, string $message): void
+    {
         $this->render();
 
-        $this->notification()->success('Exclusao de endereco.', 'Endereco excluido com sucesso.');
+        $this->notification()->success($title, $message);
+    }
+
+    public function mount():void
+    {
+        $this->data = [
+            'zipcode' => '',
+            'street' => '',
+            'neighborhood' => '',
+            'city' => '',
+            'state' => '',
+        ];
     }
 
     public function render()
