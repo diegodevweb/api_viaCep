@@ -23,6 +23,7 @@ class SearchZipcode extends Component
     use Actions;
     use AddressPropertiesRulesValidationTrait;
     use AddressPropertiesValidationMessagesTrait;
+    use WithPagination;
 
     public array $data = [];
 
@@ -68,10 +69,10 @@ class SearchZipcode extends Component
     public function getAddressProperty()
     {
         if ($this->search) {
-            return Address::where('street', 'like', "%{$this->search}%")->paginate(4);
+            return Address::where('street', 'like', "%{$this->search}%")->paginate(3);
         }
 
-        return Address::paginate(4);
+        return Address::paginate(3);
     }
 
     public function mount(): void
