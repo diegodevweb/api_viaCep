@@ -12,12 +12,16 @@ class ViaCepService
     {
         $response = collect(Http::get("http://viacep.com.br/ws/{$zipcode}/json/")->json());
 
-        return [
-            'zipcode' => $response['cep'],
-            'street' => $response['logradouro'],
-            'neighborhood' => $response['bairro'],
-            'city' => $response['localidade'],
-            'state' => $response['uf'],
-        ];
+        if (isset($response['cep'])) {
+            return [
+                'zipcode' => $response['cep'],
+                'street' => $response['logradouro'] ?? '',
+                'neighborhood' => $response['bairro'] ?? '',
+                'city' => $response['localidade'] ?? '',
+                'state' => $response['uf'] ?? '',
+            ];
+        } else {
+            return ['error' => 'CEP não encontrado'];
+        }
     }
 }

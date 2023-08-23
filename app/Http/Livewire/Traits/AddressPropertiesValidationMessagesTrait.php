@@ -13,6 +13,7 @@ trait AddressPropertiesValidationMessagesTrait
         'data.city.required' => 'O campo CIDADE é obrigatório.',
         'data.state.required' => 'O campo ESTADO é obrigatório.',
         'data.state.max' => 'O campo ESTADO deve ter exatamente 2 CARACTERES.',
+        'data.zipcode.error' => 'Campo Cep incorreto, verifique e tente novamente.'
     ];
 }
 

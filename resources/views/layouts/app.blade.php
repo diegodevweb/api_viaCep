@@ -18,7 +18,7 @@
    
     <script src="//unpkg.com/alpinejs" defer></script>
     @livewireScripts 
-    <wireui:scripts />
+    @wireUiScripts()
 
 </body>
 </html>
