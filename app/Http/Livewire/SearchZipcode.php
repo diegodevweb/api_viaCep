@@ -4,85 +4,83 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire;
 
+use App\Actions\AddressGetPropertiesAction;
 use App\Actions\AddressStoreAction;
-use App\Http\Livewire\Traits\AddressPropertiesMessagesTrait;
+use App\Http\Livewire\Traits\AddressPropertiesValidationMessagesTrait;
 use App\Http\Livewire\Traits\AddressPropertiesRulesValidationTrait;
-use App\Services\ViaCep\ViaCepService;
-use Illuminate\Support\Facades\Http;
 use App\Models\Address;
+use App\Services\ViaCep\ViaCepService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Livewire\Component;
+use Livewire\WithPagination;
 use WireUi\Traits\Actions;
+
 class SearchZipcode extends Component
 {
     use Actions;
     use AddressPropertiesRulesValidationTrait;
-    use AddressPropertiesMessagesTrait;
+    use AddressPropertiesValidationMessagesTrait;
 
     public array $data = [];
-    public array $addresses = [];
 
-    public function updated(string $key, string $value):void
+    public string $search = '';
+
+    protected $queryString = ['search'];
+
+    public function updated(string $key, string $value): void
     {
-        if($key === 'data.zipcode') {
+        if ($key === 'data.zipcode') {
             $this->data = ViaCepService::handle($value);
         }
     }
 
     public function save(): void
     {
-
         $this->validate();
 
         AddressStoreAction::save($this->data);
 
-        $this->render();
-
-        $this->showNotification('Atualizacao/Criacao', 'Endereco salvo/atualizado com sucesso!');
+        $this->showNotification('Crição/Atualização', 'O endereço foi criado/atualizado com sucesso!');
 
         $this->resetExcept('addresses');
-
-
     }
 
     public function edit(string $id): void
     {
-        $address = Address::find($id);
-        $this->data['zipcode'] = $address->zipcode;
-        $this->data['street'] = $address->street;
-        $this->data['neighborhood'] = $address->neighborhood;
-        $this->data['city'] = $address->city;
-        $this->data['state'] = $address->state;
+        $this->data = AddressGetPropertiesAction::handle($id);
     }
 
     public function remove(string $id): void
     {
-        $address = Address::find($id);
-        $address?->delete();
-        $this->showNotification('Exclusao de endereco.', 'Endereco excluido com sucesso.');
+        Address::find($id)?->delete();
+
+        $this->showNotification('Exclusão de Endereço', 'Endereço excluído com sucesso!');
     }
 
     private function showNotification(string $title, string $message): void
     {
-        $this->render();
-
         $this->notification()->success($title, $message);
     }
 
-    public function mount():void
+    public function getAddressProperty()
     {
-        $this->data = [
-            'zipcode' => '',
-            'street' => '',
-            'neighborhood' => '',
-            'city' => '',
-            'state' => '',
-        ];
+        if ($this->search) {
+            return Address::where('street', 'like', "%{$this->search}%")->paginate(4);
+        }
+
+        return Address::paginate(4);
     }
 
-    public function render()
+    public function mount(): void
     {
-        $this->addresses = Address::all()->toArray();
+        $this->data = AddressGetPropertiesAction::getEmptyProperties();
+    }
 
+    public function render(): Factory|View|Application
+    {
         return view('livewire.search-zipcode');
     }
 }
