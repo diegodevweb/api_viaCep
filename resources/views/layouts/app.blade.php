@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-Br">
 
 <head>
     <meta charset="UTF-8">
@@ -9,17 +9,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <livewire:styles />
+    @livewireStyles
 </head>
 
 <body>
     {{ $slot }}
 
-    <livewire:scripts />
-    <wireui:scripts />
+   
     <script src="//unpkg.com/alpinejs" defer></script>
-
+    @livewireScripts 
+    <wireui:scripts />
 
 </body>
-
 </html>
