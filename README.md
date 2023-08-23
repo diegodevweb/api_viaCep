@@ -30,8 +30,8 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 1. Pré-requisitos:
 Certifique-se de ter instalados em sua máquina:
 
-Docker
-Docker Compose
+    Docker
+    Docker Compose
 
 2. Clonar o repositório do projeto em sua máquina local.
 
