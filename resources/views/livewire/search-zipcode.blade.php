@@ -27,7 +27,7 @@
         <hr class="my-8">
 
         <!-- Tabela -->
-        <div class="max-w-[65%] mx-auto bg-white rounded-lg shadow-md md:table-auto sm:table-fixed">
+        <div class="max-w-[65%] mx-auto bg-white rounded-lg shadow-md md:overflow-auto sm:overflow-auto">
             <table class="min-w-full table-auto">
                 <thead>
                     <tr>
