@@ -15,10 +15,10 @@
 <body>
     {{ $slot }}
 
-   
-    <script src="//unpkg.com/alpinejs" defer></script>
-    @livewireScripts 
+
+    @livewireScripts
     @wireUiScripts()
+    <script src="//unpkg.com/alpinejs" defer></script>
 
 </body>
 </html>

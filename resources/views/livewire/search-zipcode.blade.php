@@ -4,7 +4,7 @@
         <form class="max-w-[65%] mx-auto p-6 bg-white rounded-lg shadow-md m-6">
             <h1 class="text-xl font-semibold mb-4">Buscador de CEP</h1>
             <div class="flex flex-col max-w-full">
-                <x-input wire:model.lazy="data.zipcode" label="CEP" placeholder="Informe o seu CEP (Só números)" />
+                <x-input wire:model.lazy="data.zipcode" label="CEP" placeholder="Informe o seu CEP" />
             </div>
             <div class="flex flex-col max-w-full">
                 <x-input wire:model="data.street" label="Rua" placeholder="Informe a Rua" />
@@ -27,7 +27,7 @@
         <hr class="my-8">
 
         <!-- Tabela -->
-        <div class="max-w-[65%] mx-auto bg-white rounded-lg shadow-md md:overflow-auto sm:overflow-auto">
+        <div class="max-w-[65%] mx-auto bg-white rounded-lg shadow-md md:overflow-auto sm:overflow-auto sm:text-sm">
             <table class="min-w-full table-auto">
                 <thead>
                     <tr>
@@ -48,10 +48,10 @@
                             <td class="px-4 py-2 border-b">{{ $address->city }}</td>
                             <td class="px-4 py-2 border-b">{{ $address->state }}</td>
                             <td class="px-4 py-2 border-b">
-                                <button class="text-blue-500 mr-2" wire:click="edit({{ $address->id }})" type="button">
+                                <button class="text-blue-500 hover:bg-blue-400 mr-2 sm:hover:bg-blue-300 rounded-md p-2" wire:click="edit({{ $address->id }})" type="button">
                                     Editar
                                 </button>
-                                <button class="text-red-500" wire:click="remove({{ $address->id }})" type="button">
+                                <button class="text-red-500 sm:hover:bg-red-300 rounded-md p-2" wire:click="remove({{ $address->id }})" type="button">
                                     Deletar
                                 </button>
                             </td>

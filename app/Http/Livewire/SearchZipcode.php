@@ -33,8 +33,16 @@ class SearchZipcode extends Component
 
     public function updated(string $key, string $value): void
     {
-        if ($key === 'data.zipcode') {
-            $this->data = ViaCepService::handle($value);
+        try {
+            if ($key === 'data.zipcode') {
+                $this->data = ViaCepService::handle($value);
+            }
+
+        } catch (\Exception $e) {
+            $this->notification()->error(
+                $title = 'Erro!',
+                $description = 'Cep não encontrado, digite um Cep válido'
+            );
         }
     }
 
@@ -56,9 +64,24 @@ class SearchZipcode extends Component
 
     public function remove(string $id): void
     {
+        $confirm = $this->notification()->confirm([
+            'title' => 'Confirma exclusao?',
+            'description' => 'Deletar endereco?',
+            'acceptLabel' => 'Confirmar',
+            'method' => 'delete',
+            'params' => $id,
+        ]);
+
+    }
+
+    public function delete($id): void
+    {
+
         Address::find($id)?->delete();
 
         $this->showNotification('Exclusão de Endereço', 'Endereço excluído com sucesso!');
+
+
     }
 
     private function showNotification(string $title, string $message): void
