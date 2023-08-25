@@ -14,33 +14,26 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 ## Funcionalidades
 
 - Busca de CEP: O sistema fornece um endpoint para buscar informações detalhadas de um determinado CEP, como rua, bairro, cidade e estado.
-
 - Cadastro de Endereços: O sistema permite cadastrar endereços no banco de dados MySQL. Os dados necessários incluem CEP, rua, bairro, cidade e estado.
-
 - O sistema também fornece uma lista de endereços cadastrados, com uma paginação de 4 endereços por página.
 
 ## Configuração e Execução
 
 1. Pré-requisitos:
-Certifique-se de ter instalados em sua máquina:
+   Certifique-se de ter instalados em sua máquina:
 
-    Docker
-    Docker Compose
-
+   - Docker
+   - Docker Compose
 2. Clonar o repositório do projeto em sua máquina local.
-
-3. Configurar o arquivo .env (utilize o comando docker-inspect para poder acessar o ip address, copie e cole no host do arquivo .env para poder fazer conexão com um banco de dados externo).
-
-4. Inicie os contêineres (docker-compose up -d ou sail up -d).
-
+3. Configurar o arquivo .env:
+   Utilize o comando `docker-inspect` para poder acessar o ip address, copie e cole no host do arquivo .env para poder fazer conexão com um banco de dados externo).
+4. Inicie os contêineres:
+   `docker-compose up -d` ou `sail up -d`.
 5. Instale as dependências do Composer e NPM
 
    Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: https://jobstreinamentos.com.br/support/knowledgebase.php?article=3
-
 6. Execute as migrações e seeds.
-
 7. Acesse a aplicação no link exibido no terminal (provavelmente será algo como: http://localhost:8000).
-
 
 ## Contribuição
 
