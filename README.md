@@ -22,23 +22,30 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 1. Pré-requisitos:
    Certifique-se de ter instalados em sua máquina:
 
-   - Docker
-   - Docker Compose
+- Docker
+- Docker Compose
+
 2. Clonar o repositório do projeto em sua máquina local.
 3. Configurar o arquivo .env:
    Utilize o comando `docker-inspect` para poder acessar o ip address, copie e cole no host do arquivo .env para poder fazer conexão com um banco de dados externo).
-4. Inicie os contêineres:
-   `docker-compose up -d` ou `sail up -d`.
-5. Instale as dependências do Composer e NPM
+4. Instale as dependências do Composer e NPM:
 
-   Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: https://jobstreinamentos.com.br/support/knowledgebase.php?article=3
-6. Execute as migrações e seeds.
-7. Acesse a aplicação no link exibido no terminal (provavelmente será algo como: http://localhost:8000).
+         docker run --rm \\
 
-## Contribuição
+         -u "\$(id -u):\$(id -g)" \\
 
-Contribuições para este projeto são bem-vindas. Sinta-se à vontade para abrir problemas ou enviar solicitações de pull com melhorias, correções ou novos recursos.
+         -v "\$(pwd):/var/www/html" \\
 
-## Licença
+         -w /var/www/html \\`
+
+         laravelsail/php82-composer:latest \\
+
+         composer install --ignore-platform-reqs
+
+   5. Inicie os contêineres: `sail up -d`.
+   6. Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
+   7. Execute as migrações e seeds.
+   8. Acesse a aplicação no link exibido no terminal ([http://localhost:8000](http://localhost:8000/)).
+Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
