@@ -48,6 +48,13 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 7. Execute as migrações e seeds.
 8. Acesse a aplicação no link exibido no terminal ([http://localhost:8000](http://localhost:8000/)).
    
+## Contribuições
+Contribuições são bem-vindas! 
+
+Se você deseja adicionar novos recursos, corrigir bugs ou melhorar a documentação, sinta-se à vontade para enviar uma solicitação de pull.
+
+
 Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
+
