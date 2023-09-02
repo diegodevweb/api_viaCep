@@ -42,10 +42,12 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 
          composer install --ignore-platform-reqs
 
-   5. Inicie os contêineres: `sail up -d`.
-   6. Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
-   7. Execute as migrações e seeds.
-   8. Acesse a aplicação no link exibido no terminal ([http://localhost:8000](http://localhost:8000/)).
+   
+5. Inicie os contêineres: `sail up -d`.
+6. Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
+7. Execute as migrações e seeds.
+8. Acesse a aplicação no link exibido no terminal ([http://localhost:8000](http://localhost:8000/)).
+   
 Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
