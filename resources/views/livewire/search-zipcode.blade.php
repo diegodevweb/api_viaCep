@@ -1,4 +1,4 @@
-<div class="p-8 bg-gray-300 h-screen">
+<div class="p-8 bg-gray-300 min-h-screen sm:h-full">
     <x-notifications />
         @csrf
         <form class="max-w-[65%] mx-auto p-6 bg-white rounded-lg shadow-md m-6">
@@ -62,7 +62,7 @@
             <div class="flex justify-end">
                 {!! $this->address->links() !!}
             </div>
+            <div class="p-2">Desenvolvido por @diegodevwebb</div>
         </div>
  </div>
-
 
