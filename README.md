@@ -1,14 +1,17 @@
 # Buscador de Ceps
 
-Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como Docker, WireUi, Vite e Tailwind CSS. O objetivo principal é fornecer um serviço para buscar informações de CEP e realizar o cadastro de endereços em um banco de dados MySQL e exibir os dados em uma tabela sem a necessidade de reload da página inteira. Desse modo trabalhamos de forma reativa, recarregando apenas os dados necessários.
+<img src="/assets/media/ezgif.com-video-to-gif.gif">
+
+Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como Docker, WireUi, Vite e Tailwind CSS. O objetivo principal é fornecer um serviço para buscar informações de CEP, realizar o cadastro de endereços em um banco de dados MySQL e exibir os dados em uma tabela sem a necessidade de reload da página inteira. Desse modo trabalhamos de forma reativa, recarregando apenas os dados necessários.
 
 ## Tecnologias Utilizadas
 
 - Docker
+- Laravel
 - Livewire
 - WireUi
 - Vite
-- Tailwind
+- Tailwind Css
 - MySQL
 
 ## Funcionalidades
@@ -26,35 +29,57 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 - Docker Compose
 
 2. Clonar o repositório do projeto em sua máquina local.
-3. Configurar o arquivo .env:
-   Utilize o comando `docker-inspect` para poder acessar o ip address, copie e cole no host do arquivo .env para poder fazer conexão com um banco de dados externo).
-4. Instale as dependências do Composer e NPM:
+3. Crie o arquivo .env e configure suas variaveis de ambiente:<br>
+   ` cp .env.example .env`
 
-         docker run --rm \\
+   ```
+   APP_NAME=api-cep
+   FORWARD_DB_PORT=3307
+   DB_CONNECTION=mysql
+   DB_HOST=mysql
+   DB_PORT=3306
+   DB_DATABASE=api_cep
+   DB_USERNAME=sail
+   DB_PASSWORD=password
 
-         -u "\$(id -u):\$(id -g)" \\
 
-         -v "\$(pwd):/var/www/html" \\
+*Note que utilizei a porta 3307*
+1. Instale as dependências do Composer:
 
-         -w /var/www/html \\`
+   ```
+   docker run --rm \\
 
-         laravelsail/php82-composer:latest \\
+   -u "\$(id -u):\$(id -g)" \\
 
-         composer install --ignore-platform-reqs
+   -v "\$(pwd):/var/www/html" \\
 
-   
-5. Inicie os contêineres: `sail up -d`.
-6. Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
-7. Execute as migrações e seeds.
-8. Acesse a aplicação no link exibido no terminal ([http://localhost:8000](http://localhost:8000/)).
-   
+   -w /var/www/html \\`
+
+   laravelsail/php82-composer:latest \\
+
+   composer install --ignore-platform-reqs
+   ```
+
+2. Inicie os contêineres: <br>`sail up -d`.
+3. Até aqui não geramos a key do arquivo .env, vamos fazer isso:<br>
+   `sail artisan key:generate`
+
+4. Instale o NPM:<br>
+   `sail npm i`
+
+5. Execute as migrations:<br>
+   `sail artisan migrate`
+
+Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
+
 ## Contribuições
-Contribuições são bem-vindas! 
+
+Contribuições são bem-vindas!
 
 Se você deseja adicionar novos recursos, corrigir bugs ou melhorar a documentação, sinta-se à vontade para enviar uma solicitação de pull.
-
 
 Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
+
 
