@@ -72,7 +72,7 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 
 Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
 
-Autores:
+## Autores:
 Diego Rodrigues @diegodevwebb
 ## Contribuições
 
