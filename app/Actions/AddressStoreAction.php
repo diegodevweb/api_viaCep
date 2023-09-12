@@ -8,17 +8,23 @@ use App\Models\Address;
 
 class AddressStoreAction
 {
-    public static function save(array $data): void
+    public static function save(array $data): bool
     {
-        Address::updateOrCreate(
-            [
-                'zipcode' => $data['zipcode'],
-            ],
+        $address = Address::updateOrCreate(
+            ['zipcode' => $data['zipcode']],
             [
                 'street' => $data['street'],
                 'neighborhood' => $data['neighborhood'],
                 'city' => $data['city'],
                 'state' => $data['state'],
-            ]);
+            ]
+        );
+
+        // Verifique se o endereço foi criado (true) ou atualizado (false)
+        return $address->wasRecentlyCreated;
     }
+
 }
+
+
+

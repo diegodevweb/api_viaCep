@@ -50,14 +50,18 @@ class SearchZipcode extends Component
     {
         $this->validate();
 
-        AddressStoreAction::save($this->data);
+        $isNewAddress = AddressStoreAction::save($this->data);
 
-        $this->showNotification('Crição/Atualização', 'O endereço foi criado/atualizado com sucesso!');
+        if($isNewAddress) {
+            $this->showNotification('Criação', 'O endereço foi criado com sucesso!');
+        } else {
+            $this->showNotification('Atualização', 'O endereço foi atualizado com sucesso!');
+        }
 
         $this->resetExcept('addresses');
     }
 
-    public function edit(string $id): void
+    public function edit(string|bool $id): void
     {
         $this->data = AddressGetPropertiesAction::handle($id);
     }
