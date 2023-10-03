@@ -13,7 +13,6 @@ use App\Services\ViaCep\ViaCepService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 use Livewire\WithPagination;
 use WireUi\Traits\Actions;
