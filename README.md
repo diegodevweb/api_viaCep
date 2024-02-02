@@ -33,7 +33,7 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
   ```composer require laravel/sail --dev ```
 
 2. Clonar o repositório do projeto em sua máquina local.
-3. Crie o arquivo .env 
+3. Crie o arquivo .env <br>
    ` cp .env.example .env`
 4. Configure suas variaveis de ambiente:<br>
    ```
