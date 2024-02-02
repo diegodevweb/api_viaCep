@@ -27,11 +27,18 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 
 - Docker
 - Docker Compose
+- Laravel 10^
+- PHP 8.2^
+- Composer
+- Opcional: Laravel Sail
+ 
+  ```composer require laravel/sail --dev ```
 
 2. Clonar o repositório do projeto em sua máquina local.
 3. Crie o arquivo .env e configure suas variaveis de ambiente:<br>
    ` cp .env.example .env`
 
+Configure o arquivo .env com as seguintes variáveis:
    ```
    APP_NAME=api-cep
    FORWARD_DB_PORT=3307
@@ -41,34 +48,30 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
    DB_DATABASE=api_cep
    DB_USERNAME=sail
    DB_PASSWORD=password
-
+   ``` 
 
 *Note que utilizei a porta 3307*
-1. Instale as dependências do Composer:
 
-   ```
-   docker run --rm \\
+Abra o arquivo /etc/hosts com seu editor de preferência, no meu caso utilizei o vim:<br>
+`sudo vim /etc/hosts` 
 
-   -u "\$(id -u):\$(id -g)" \\
+Adicione a linha abaixo:<br>
+`127.0.0.1 laravel.test`
 
-   -v "\$(pwd):/var/www/html" \\
-
-   -w /var/www/html \\`
-
-   laravelsail/php82-composer:latest \\
-
-   composer install --ignore-platform-reqs
-   ```
-
-2. Inicie os contêineres: <br>`sail up -d`.
-3. Até aqui não geramos a key do arquivo .env, vamos fazer isso:<br>
+1. Inicie os contêineres: <br>`sail up -d`.
+2. Instale as dependências do Laravel:<br>
+   `sail composer install` 
+3. Conecte o banco de dados com as informacoes do arquivo .env<br>
+4. Até aqui não geramos a key do arquivo .env, vamos fazer isso:<br>
    `sail artisan key:generate`
-
-4. Instale o NPM:<br>
+5. Instale o NPM:<br>
    `sail npm i`
-
-5. Execute as migrations:<br>
+6. Execute as migrations:<br>
    `sail artisan migrate`
+7. Rode o comando npm run dev para compilar os arquivos do Vite e Tailwind:<br>
+   `sail npm run dev`
+8. Abra o navegador e acesse o endereço: (http://laravel.test) ou (http://localhost)
+
 
 Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
 
