@@ -27,18 +27,15 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 
 - Docker
 - Docker Compose
-- Laravel 10^
-- PHP 8.2^
 - Composer
-- Opcional: Laravel Sail
+- Laravel Sail
  
   ```composer require laravel/sail --dev ```
 
 2. Clonar o repositório do projeto em sua máquina local.
-3. Crie o arquivo .env e configure suas variaveis de ambiente:<br>
+3. Crie o arquivo .env 
    ` cp .env.example .env`
-
-Configure o arquivo .env com as seguintes variáveis:
+4. Configure suas variaveis de ambiente:<br>
    ```
    APP_NAME=api-cep
    FORWARD_DB_PORT=3307
@@ -64,14 +61,15 @@ Adicione a linha abaixo:<br>
 3. Conecte o banco de dados com as informacoes do arquivo .env<br>
 4. Até aqui não geramos a key do arquivo .env, vamos fazer isso:<br>
    `sail artisan key:generate`
-5. Instale o NPM:<br>
-   `sail npm i`
-6. Execute as migrations:<br>
+5. Execute as migrations:<br>
    `sail artisan migrate`
+6. Instale o NPM:<br>
+   `sail npm i`
 7. Rode o comando npm run dev para compilar os arquivos do Vite e Tailwind:<br>
    `sail npm run dev`
 8. Abra o navegador e acesse o endereço: (http://laravel.test) ou (http://localhost)
 
+OBS: Os comandos sail estão configurados com um alias, para configurar o alias em sua máquina, siga os passos da documentaçao do Laravel Sail [https://laravel.com/docs/10.x/sail#configuring-a-shell-alias] 
 
 Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
 
