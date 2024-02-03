@@ -70,7 +70,7 @@ Diego Rodrigues @diegodevwebb
 
 Contribuições são bem-vindas!
 
-Se você deseja adicionar novos recursos, corrigir bugs ou melhorar a documentação, sinta-se à vontade para enviar uma solicitação de pull.
+Se você deseja adicionar novos recursos, corrigir bugs ou melhorar a documentação, sinta-se à vontade para enviar uma PR.
 
 Licença
 
