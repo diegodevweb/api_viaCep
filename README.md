@@ -27,11 +27,6 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
 
 - Docker
 - Docker Compose
-- Composer
-- Laravel Sail
- 
-  ```composer require laravel/sail --dev ```
-
 2. Clonar o repositório do projeto em sua máquina local.
 3. Crie o arquivo .env <br>
    ` cp .env.example .env`
@@ -44,32 +39,28 @@ Este projeto consome a API ViaCep e foi desenvolvido utilizando tecnologias como
    DB_PORT=3306
    DB_DATABASE=api_cep
    DB_USERNAME=sail
-   DB_PASSWORD=password
+   DB_PASSWORD=
    ``` 
 
 *Note que utilizei a porta 3307*
 
-Abra o arquivo /etc/hosts com seu editor de preferência, no meu caso utilizei o vim:<br>
-`sudo vim /etc/hosts` 
-
-Adicione a linha abaixo:<br>
-`127.0.0.1 laravel.test`
-
-1. Inicie os contêineres: <br>`sail up -d`.
-2. Instale as dependências do Laravel:<br>
-   `sail composer install` 
-3. Conecte o banco de dados com as informacoes do arquivo .env<br>
-4. Até aqui não geramos a key do arquivo .env, vamos fazer isso:<br>
-   `sail artisan key:generate`
-5. Execute as migrations:<br>
-   `sail artisan migrate`
-6. Instale o NPM:<br>
-   `sail npm i`
-7. Rode o comando npm run dev para compilar os arquivos do Vite e Tailwind:<br>
-   `sail npm run dev`
-8. Abra o navegador e acesse o endereço: (http://laravel.test) ou (http://localhost)
-
-OBS: Os comandos sail estão configurados com um alias, para configurar o alias em sua máquina, siga os passos da documentaçao do Laravel Sail [https://laravel.com/docs/10.x/sail#configuring-a-shell-alias] 
+1. Inicie os contêineres: <br>`docker-compose up -d`.
+2. Verifique os contêineres em execução: <br>`docker ps`.
+3. Pegue o id do conteiner do Laravel Sail, a imagem deste conteiner deve ser sail-8.2/app:<br>
+4. Execute o comando para entrar no conteiner:<br>
+   `docker exec -it <id_do_conteiner> bash`
+5. Dentro do conteiner, execute o comando para instalar as dependências do Laravel:<br>
+   `composer install`
+6. Conecte o banco de dados com as informacoes do arquivo .env<br>
+7. Acesse novamente o container do app Laravel e rode o comando:<br>
+   `php artisan key:generate`
+8. Execute as migrations:<br>
+   `php artisan migrate`
+9. Instale o NPM:<br>
+   `npm install`
+10. Rode o comando npm run dev para compilar os arquivos do Vite e Tailwind:<br>
+   `npm run dev`
+11. Abra o navegador e acesse o endereço: (http://laravel.test) ou (http://localhost)
 
 Caso tenha algum erro nos arquivos do Vite ou Tailwind, siga este tutorial: [https://jobstreinamentos.com.br/support/knowledgebase.php?article=3](https://jobstreinamentos.com.br/support/knowledgebase.php?article=3)
 
